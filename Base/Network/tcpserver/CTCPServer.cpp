@@ -7,9 +7,9 @@ using namespace Engine;
 
 pthread_mutex_t mutlock = PTHREAD_MUTEX_INITIALIZER;
 
-void* SocketConnect(void* arg)
+void* thread_SocketConnect(void* _arg)
 {
-    int accp_sock = (int)(*((int*)arg));
+    int accp_sock = (int)(*((int*)_arg));
 
     int buf;
 
@@ -33,11 +33,11 @@ CTCPServer::~CTCPServer()
 
 }
 
-sockaddr_in CTCPServer::SetServer(const sockaddr_in& addr)
+sockaddr_in CTCPServer::SetServer(const sockaddr_in& _addr)
 {
-    memset(&svrAddr, 0, sizeof(svrAddr));
-    svrAddr = addr;
-    return svrAddr;
+    memset(&mtag_svrAddr, 0, sizeof(mtag_svrAddr));
+    mtag_svrAddr = _addr;
+    return mtag_svrAddr;
 }
 
 void CTCPServer::initialize(void)
@@ -56,8 +56,8 @@ void CTCPServer::initialize(void)
     res_bind = 
         bind(
             listen_sock
-            , (struct sockaddr *)&svrAddr
-            , sizeof(svrAddr));
+            , (struct sockaddr *)&mtag_svrAddr
+            , sizeof(mtag_svrAddr));
 
     if(res_bind < 0)
     {
@@ -65,7 +65,7 @@ void CTCPServer::initialize(void)
         exit(0);
     }
     
-    int addrlen = sizeof(svrAddr);
+    int addrlen = sizeof(mtag_svrAddr);
     pthread_t tid[100];
     // loop
     while(1)
@@ -92,9 +92,9 @@ void CTCPServer::initialize(void)
             int res_trhead = 0;
             res_trhead =
                 pthread_create(
-                    &tid[clientNum]
+                    &tid[mi_clientNum]
                     , NULL
-                    , &SocketConnect
+                    , &thread_SocketConnect
                     , (void*)&accp_sock);
 
             if(res_trhead < 0)
@@ -104,11 +104,11 @@ void CTCPServer::initialize(void)
             else
             {
                 int res_thredjoin = 0;
-                res_thredjoin = pthread_join(tid[clientNum++], NULL);
+                res_thredjoin = pthread_join(tid[mi_clientNum++], NULL);
 
-                if(100 <= clientNum)
+                if(100 <= mi_clientNum)
                 {
-                    clientNum = 0;
+                    mi_clientNum = 0;
                 }
             }
         }

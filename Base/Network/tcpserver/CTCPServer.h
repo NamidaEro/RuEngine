@@ -18,14 +18,14 @@ class CTCPServer
 {
 private:
     sockaddr_in mtag_svrAddr;
-    int clientNum = 0;
+    int mi_clientNum = 0;
 
 public:
     CTCPServer();
     ~CTCPServer();
 
 public:
-    sockaddr_in SetServer(const sockaddr_in& addr);
+    sockaddr_in SetServer(const sockaddr_in& _addr);
     void initialize(void);
 };
 
