@@ -7,6 +7,10 @@ namespace RuEngine
 class CTCPConnect
 {
 public:
+    char* msz_port;
+    char* msz_ip;
+
+public:
     CTCPConnect();
     ~CTCPConnect();
 };

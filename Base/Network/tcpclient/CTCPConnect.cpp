@@ -4,7 +4,7 @@ using namespace RuEngine;
 
 CTCPConnect::CTCPConnect()
 {
-
+    
 }
 
 CTCPConnect::~CTCPConnect()

@@ -17,7 +17,7 @@ namespace Engine
 class CTCPServer
 {
 private:
-    sockaddr_in svrAddr;
+    sockaddr_in mtag_svrAddr;
     int clientNum = 0;
 
 public:
