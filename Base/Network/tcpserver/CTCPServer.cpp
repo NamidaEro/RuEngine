@@ -13,13 +13,17 @@ void* thread_SocketConnect(void* _arg)
 
     int buf;
 
-    ssize_t res_read;
-    res_read = read(accp_sock, &buf, 4);
-    cout << "@>> ";
-    cout << buf << endl;
-    pthread_mutex_lock(&mutlock);
-    pthread_mutex_unlock(&mutlock);
+    //while(true)
+    //{
+        ssize_t res_read;
+        res_read = read(accp_sock, &buf, 4);
+        cout << "@>> ";
+        cout << buf << endl;
+        pthread_mutex_lock(&mutlock);
 
+        pthread_mutex_unlock(&mutlock);
+    //}
+    
     close(accp_sock);
 }
 
@@ -65,17 +69,17 @@ void CTCPServer::initialize(void)
         exit(0);
     }
     
+    int res_listen = 0;
+    res_listen = listen(listen_sock, 10);
+
     int addrlen = sizeof(mtag_svrAddr);
     pthread_t tid[100];
     // loop
     while(1)
     {
-        int res_listen = 0;
-        res_listen = listen(listen_sock, 10);
-        
         puts("client wait....");
 
-        int accp_sock = 0;
+        int accp_sock;
         sockaddr_in* client = new sockaddr_in();
         accp_sock = 
             accept(
@@ -86,31 +90,31 @@ void CTCPServer::initialize(void)
         if(accp_sock < 0)
         {
             perror("accept failed");
+            delete client;
+            continue;
         }
         else
         {
-            int res_trhead = 0;
-            res_trhead =
-                pthread_create(
-                    &tid[mi_clientNum]
-                    , NULL
-                    , &thread_SocketConnect
-                    , (void*)&accp_sock);
+           mvec_client.push_back(client);
+        }
+   
+        int res_trhead = 0;
+        res_trhead =
+            pthread_create(
+                &tid[mi_clientNum], NULL, &thread_SocketConnect, (void *)&accp_sock);
 
-            if(res_trhead < 0)
-            {
-                perror("thread create failed");
-            }
-            else
-            {
-                int res_thredjoin = 0;
-                res_thredjoin = pthread_join(tid[mi_clientNum++], NULL);
+        if (res_trhead < 0)
+        {
+            perror("thread create failed");
+            continue;
+        }
 
-                if(100 <= mi_clientNum)
-                {
-                    mi_clientNum = 0;
-                }
-            }
+        int res_thredjoin = 0;
+        res_thredjoin = pthread_join(tid[mi_clientNum++], NULL);
+
+        if (100 <= mi_clientNum)
+        {
+            mi_clientNum = 0;
         }
     }
 }

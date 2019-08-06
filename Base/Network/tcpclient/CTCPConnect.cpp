@@ -43,7 +43,8 @@ void CTCPConnect::Initialize(const char* _sz_port, const char* _sz_addr)
     {
         memset(&mtag_servaddr, 0, strlen);
         mtag_servaddr.sin_family = AF_INET;
-        inet_pton(AF_INET, _sz_addr, &mtag_servaddr.sin_addr);
+        //inet_pton(AF_INET, _sz_addr, &mtag_servaddr.sin_addr);
+        mtag_servaddr.sin_addr.s_addr = inet_addr(_sz_addr);
         mtag_servaddr.sin_port = htons(atoi(_sz_port));
     }
 }
@@ -58,6 +59,11 @@ int CTCPConnect::Connect()
     cout << msz_ip << ":" << msz_port << endl;
 
     result = connect(mi_socketfd, (struct sockaddr *)&mtag_servaddr, strlen);
+
+    if(result < 0)
+    {
+        cout << "connect error" << endl;
+    }
 
     return result;
 }

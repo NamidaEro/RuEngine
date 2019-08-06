@@ -18,6 +18,8 @@ debug :
 	$(CXX) $(LIBSOFLAG)$(LIBTARGET).so -o $(LIBTARGET).so.1.0.0 ./*.o
 	cp $(LIBTARGET).so.1.0.0 /usr/lib/$(LIBTARGET).so.1.0.0
 	ln -fs /usr/lib/$(LIBTARGET).so.1.0.0 /usr/lib/$(LIBTARGET).so
+	g++ -c ./TestMain/Main.cpp -o ./TestMain/Main.o -I./Headers -lEngine -pthread
+	g++ -o out ./TestMain/Main.o -I./Headers -lEngine -pthread
 
 .PHONY:release
 release : $(TARGET)
