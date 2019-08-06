@@ -72,6 +72,8 @@ void CTCPConnect::Send(void* _packet)
 {
     ssize_t result = write(mi_socketfd, _packet, 4);
     
+    cout << "SendData -> result : " << result << endl;
+
     if (result < 0)
     {
         
