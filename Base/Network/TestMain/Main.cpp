@@ -26,7 +26,7 @@ int main(int argc, char** argv)
     else
     {
         CTCPConnect tcp;
-        tcp.Initialize("8888", "127.0.0.1");
+        tcp.Initialize(argv[1], argv[2]);
         tcp.Connect();
 
         int* a = new int;
