@@ -24,6 +24,14 @@ void CTCPConnect::Initialize()
 
 void CTCPConnect::Initialize(const char* _sz_port, const char* _sz_addr)
 {
+    int addrlen = strnlen(_sz_addr, 255);
+    msz_ip = new char[addrlen];
+    memccpy(msz_ip, _sz_addr, addrlen, 255);
+
+    int portlen = strnlen(_sz_port, 255);
+    msz_port = new char[portlen];
+    memccpy(msz_port, _sz_port, portlen, 255);
+
 	int strlen = sizeof(mtag_servaddr);
 	int buf, cNum;//cNum ���� ��ȣ
 
@@ -45,6 +53,10 @@ int CTCPConnect::Connect()
     int result = 0;
 
     int strlen = sizeof(mtag_servaddr);
+    
+    cout << "try connect to server : ";
+    cout << msz_ip << ":" << msz_port << endl;
+
     result = connect(mi_socketfd, (struct sockaddr *)&mtag_servaddr, strlen);
 
     return result;
