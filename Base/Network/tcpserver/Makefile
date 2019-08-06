@@ -14,9 +14,7 @@ all : $(TARGET)
 .PHONY:debug
 debug : 
 	$(CXX) $(DMODE) $(LIBFLAG) $(SRCS) $(INC) -pthread
-	$(CXX) $(LIBSOFLAG)$(LIBTARGET).so -o $(LIBTARGET).so.1.0.0 ./*.o
-	cp $(LIBTARGET).so.1.0.0 /usr/lib/$(LIBTARGET).so.1.0.0
-	ln -fs /usr/lib/$(LIBTARGET).so.1.0.0 /usr/lib/$(LIBTARGET).so
+	cp ./$(OBJS) ../$(OBJS)
 
 .PHONY:release
 release : $(TARGET)
