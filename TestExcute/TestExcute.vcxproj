@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{BCB34575-525A-48DE-B5B3-59BD85917EE4}</ProjectGuid>
-    <RootNamespace>RuEngine</RootNamespace>
+    <ProjectGuid>{C6343C31-CAD5-4B5E-9439-41158F3950D0}</ProjectGuid>
+    <RootNamespace>TestExcute</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
