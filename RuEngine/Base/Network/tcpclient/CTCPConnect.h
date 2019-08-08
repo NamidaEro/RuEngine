@@ -4,8 +4,6 @@
 #if _WIN64 || _WIN32
 #include <stdio.h>
 #include <WinSock2.h>
-
-#pragma comment(lib, "ws2_32")
 #else
 #include <stdio.h>
 #include <stdlib.h>
