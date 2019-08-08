@@ -1,6 +1,8 @@
 #ifndef CTCPCONNECT_H__
 #define CTCPCONNECT_H__
 
+#if _WIN64 || _WIN32
+#else
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,12 +13,21 @@
 #include <unistd.h>
 #include <time.h>
 #include <iostream>
+#endif
+
 
 using namespace std;
 
 namespace RuEngine
 {
-
+#if _WIN64 || _WIN32
+class __declspec(dllexport) CTCPConnect
+{
+public:
+	CTCPConnect();
+	~CTCPConnect();
+};
+#else
 class CTCPConnect
 {
 public:
@@ -43,7 +54,7 @@ public:
     void Send(void* _packet);
     void Close();
 };
-
+#endif
 }
 
 #endif

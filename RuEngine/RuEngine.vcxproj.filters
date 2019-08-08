@@ -27,6 +27,9 @@
     <ClCompile Include="Base\Utillity\String\WString.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="dllMain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Network\tcpclient\CTCPConnect.h">
