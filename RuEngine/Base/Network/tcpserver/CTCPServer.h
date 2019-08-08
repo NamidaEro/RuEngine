@@ -15,8 +15,6 @@
 #include <vector>
 #endif // _WIN64
 
-
-
 using namespace std;
 
 namespace RuEngine
@@ -31,8 +29,6 @@ public:
 #else
 class CTCPServer
 {
-
-
 private:
 	sockaddr_in mtag_svrAddr;
 	int mi_clientNum = 0;
