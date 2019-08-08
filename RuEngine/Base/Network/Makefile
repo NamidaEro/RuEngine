@@ -13,9 +13,10 @@ all : $(TARGET)
 
 .PHONY:debug
 debug : 
-	$(CXX) $(DMODE) $(LIBFLAG) $(SRCS) $(INC)
-	cp ./*.o ../lib
-	cp ./*.h ../Headers
+	cd ./tcpclient; $(MAKE) debug
+	cd ./tcpserver; $(MAKE) debug
+	cp ./Headers/*.h ../headers
+	cp ./lib/*.o ../lib
 
 .PHONY:release
 release : $(TARGET)

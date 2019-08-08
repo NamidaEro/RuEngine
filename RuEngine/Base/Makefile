@@ -12,10 +12,12 @@ all : $(TARGET)
 	$(CXX) $(LIBSOFLAG)$(LIBTARGET).so -o $(LIBTARGET).so.1.0.0
 
 .PHONY:debug
-debug : 
-	$(CXX) $(DMODE) $(LIBFLAG) $(SRCS) $(INC)
-	cp ./*.o ../lib
-	cp ./*.h ../Headers
+debug :
+	cd ./Network; $(MAKE) debug
+	cd ./Utillity; $(MAKE) debug
+	$(CXX) $(LIBSOFLAG)$(LIBTARGET).so -o $(LIBTARGET).so.1.0.0 ./lib/*.o
+	cp $(LIBTARGET).so.1.0.0 /usr/lib/$(LIBTARGET).so.1.0.0
+	ln -fs /usr/lib/$(LIBTARGET).so.1.0.0 /usr/lib/$(LIBTARGET).so
 
 .PHONY:release
 release : $(TARGET)

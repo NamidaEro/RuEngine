@@ -14,7 +14,7 @@ all : $(TARGET)
 .PHONY:debug
 debug : 
 	$(CXX) $(DMODE) $(LIBFLAG) $(SRCS) $(INC) -pthread
-	cp ./$(OBJS) ../$(OBJS)
+	cp ./*.o ../lib
 	cp ./*.h ../Headers
 
 .PHONY:release
