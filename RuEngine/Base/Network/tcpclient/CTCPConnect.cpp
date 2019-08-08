@@ -45,7 +45,19 @@ void CTCPConnect::Initialize(const char* _sz_port, const char* _sz_addr)
 
 int CTCPConnect::Connect()
 {
-	int result = connect(mtag_socket, (SOCKADDR*)&mtag_addr, sizeof(mtag_addr));
+	int result = 0;
+	try
+	{
+		result = connect(mtag_socket, (SOCKADDR*)&mtag_addr, sizeof(mtag_addr));
+
+		if (result < 0)
+			throw result;
+	}
+	catch (int e)
+	{
+
+	}
+
 	return result;
 }
 
