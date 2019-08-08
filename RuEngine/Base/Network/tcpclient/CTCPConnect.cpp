@@ -8,10 +8,71 @@ CTCPConnect::CTCPConnect()
 
 }
 
+CTCPConnect::CTCPConnect(const char* _sz_port, const char* _sz_addr)
+{
+	Initialize(_sz_port, _sz_addr);
+}
+
 CTCPConnect::~CTCPConnect()
 {
-
+	Close();
+	Release();
 }
+
+void CTCPConnect::Initialize()
+{
+	WSAStartup(MAKEWORD(2, 2), &mtag_data);
+
+	mtag_socket = {};
+	mtag_socket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+	mtag_addr = {};
+	mtag_addr.sin_family = AF_INET;
+	mtag_addr.sin_port = htons(atoi(msz_port));
+	mtag_addr.sin_addr.s_addr = inet_addr(msz_ip);
+}
+
+void CTCPConnect::Initialize(const char* _sz_port, const char* _sz_addr)
+{
+	int addrlen = strnlen(_sz_addr, 255);
+	msz_ip = new char[addrlen];
+	memccpy(msz_ip, _sz_addr, addrlen, 255);
+
+	int portlen = strnlen(_sz_port, 255);
+	msz_port = new char[portlen];
+	memccpy(msz_port, _sz_port, portlen, 255);
+}
+
+int CTCPConnect::Connect()
+{
+	int result = connect(mtag_socket, (SOCKADDR*)&mtag_addr, sizeof(mtag_addr));
+	return result;
+}
+
+void CTCPConnect::Send(void* _packet)
+{
+	int result = send(mtag_socket, (char*)_packet, strnlen_s((char*)_packet, 255), 0);
+}
+
+void CTCPConnect::Close()
+{
+	closesocket(mtag_socket);
+	WSACleanup();
+}
+
+void CTCPConnect::Release()
+{
+	if (nullptr != msz_ip)
+	{
+		delete msz_ip;
+	}
+
+	if (nullptr != msz_port)
+	{
+		delete msz_port;
+	}
+}
+
 #else
 CTCPConnect::CTCPConnect()
 {
@@ -25,7 +86,8 @@ CTCPConnect::CTCPConnect(const char* _sz_port, const char* _sz_addr)
 
 CTCPConnect::~CTCPConnect()
 {
-
+	Close();
+	Release();
 }
 
 void CTCPConnect::Initialize()
@@ -98,6 +160,19 @@ void CTCPConnect::Close()
 	if (result < 0)
 	{
 
+	}
+}
+
+void CTCPConnect::Release()
+{
+	if (nullptr != msz_ip)
+	{
+		delete msz_ip;
+	}
+
+	if (nullptr != msz_port)
+	{
+		delete msz_port;
 	}
 }
 #endif
