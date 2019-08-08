@@ -18,6 +18,8 @@ debug :
 	$(CXX) $(LIBSOFLAG)$(LIBTARGET).so -o $(LIBTARGET).so.1.0.0 ./lib/*.o
 	cp $(LIBTARGET).so.1.0.0 /usr/lib/$(LIBTARGET).so.1.0.0
 	ln -fs /usr/lib/$(LIBTARGET).so.1.0.0 /usr/lib/$(LIBTARGET).so
+	cp ./headers/*.h ../../Headers
+	cp ./*.0 ../../lib
 
 .PHONY:release
 release : $(TARGET)
