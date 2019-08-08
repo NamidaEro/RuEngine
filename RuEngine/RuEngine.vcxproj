@@ -115,6 +115,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Base\Network\tcpclient\CTCPConnect.cpp" />
+    <ClCompile Include="Base\Network\tcpserver\CTCPServer.cpp" />
+    <ClCompile Include="Base\Utillity\String\AString.cpp" />
+    <ClCompile Include="Base\Utillity\String\WString.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\Network\tcpclient\CTCPConnect.h" />
+    <ClInclude Include="Base\Network\tcpserver\CTCPServer.h" />
+    <ClInclude Include="Base\Utillity\String\AString.h" />
+    <ClInclude Include="Base\Utillity\String\WString.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
