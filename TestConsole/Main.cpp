@@ -11,12 +11,13 @@
 using namespace std;
 using namespace RuEngine;
 
-int main()
+int main(int argc, char** argv)
 {
-	CFile file("text.txt");
+	CFile file;
+	file.Open("/home/ubuntu/git/RuEngine/TestConsole/test.txt", Add | Out);
 
-	file.Write("되나?");
+	file.Write(argv[1]);
 	
-	system("pause");
+	//system("pause");
 	return 0;
 }
