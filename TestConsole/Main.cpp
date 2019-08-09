@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 
 	file.Readline();
 #else
-	file.Open("/home/ubuntu/git/RuEngine/TestConsole/test.txt", (RuEngine::eFileMode)(Add | Out));
+	file.Open("/home/ubuntu/git/RuEngine/TestConsole/test.txt", (RuEngine::eFileMode)(Add | In));
 	//file.Write(argv[1]);
 	AString str;
 	str.SetString(file.Readline());
