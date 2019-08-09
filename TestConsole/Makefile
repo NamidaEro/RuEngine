@@ -14,7 +14,7 @@ all : $(TARGET)
 .PHONY:debug
 debug :
 	g++ -c Main.cpp -o Main.o -I../Headers -L../lib -lEngine -pthread
-	g++ -g -o out Main.o -I../Headers -L../lib -lEngine -pthread
+	g++ -g -o Main Main.o -I../Headers -L../lib -lEngine -pthread
 
 .PHONY:release
 release : $(TARGET)

@@ -1,20 +1,22 @@
 #include <iostream>
 
+#if _WIN64 | _WIN32
 #include "AString.h"
 #include "CTCPConnect.h"
+#include "CFile.h"
+#else
+#include "../Headers/CFile.h"
+#endif
 
 using namespace std;
 using namespace RuEngine;
 
 int main()
 {
-	AString str("hello");
+	CFile file("text.txt");
 
-	cout << str << endl;
-
-	CTCPConnect con("8888", "127.0.0.1");
-	con.Connect();
-
+	file.Write("되나?");
+	
 	system("pause");
 	return 0;
 }

@@ -7,7 +7,11 @@ using namespace std;
 
 namespace RuEngine
 {
+#if _WIN64 || _WIN32
+class __declspec(dllexport) AString
+#else
 class AString
+#endif
 {
 private:
     char* msz_str = nullptr;

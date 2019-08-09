@@ -13,10 +13,9 @@ all : $(TARGET)
 
 .PHONY:debug
 debug : 
-	cd ./String; $(MAKE) debug
-	cd ./File; $(MAKE) debug
-	cp ./Headers/*.h ../headers
-	cp ./lib/*.o ../lib
+	$(CXX) $(DMODE) $(LIBFLAG) $(SRCS) $(INC)
+	cp ./*.o ../lib
+	cp ./*.h ../Headers
 
 .PHONY:release
 release : $(TARGET)
