@@ -12,31 +12,41 @@
 namespace RuEngine
 {
 
- typedef std::ios_base::openmode FileMode;
- /// Seek to end before each write.
- static const FileMode Add = std::ios_base::app;
+enum eFileMode
+{
+    Add = std::ios_base::app
+    , End = std::ios_base::ate
+    , Binary = std::ios_base::binary
+    , In = std::ios_base::in
+    , Out = std::ios_base::out
+    , New = std::ios_base::trunc
+};
 
- /// Open and seek to end immediately after opening.
- static const FileMode End = std::ios_base::ate;
+//  typedef std::ios_base::openmode FileMode;
+//  /// Seek to end before each write.
+//  static const FileMode Add = std::ios_base::app;
 
- /// Perform input and output in binary mode (as opposed to text mode).
- /// This is probably not what you think it is; see
- /// https://gcc.gnu.org/onlinedocs/libstdc++/manual/fstreams.html#std.io.filestreams.binary
- static const FileMode Binary = std::ios_base::binary;
+//  /// Open and seek to end immediately after opening.
+//  static const FileMode End = std::ios_base::ate;
 
- /// Open for input.  Default for @c ifstream and fstream.
- static const FileMode In = std::ios_base::in;
+//  /// Perform input and output in binary mode (as opposed to text mode).
+//  /// This is probably not what you think it is; see
+//  /// https://gcc.gnu.org/onlinedocs/libstdc++/manual/fstreams.html#std.io.filestreams.binary
+//  static const FileMode Binary = std::ios_base::binary;
 
- /// Open for output.  Default for @c ofstream and fstream.
- static const FileMode Out = std::ios_base::out;
+//  /// Open for input.  Default for @c ifstream and fstream.
+//  static const FileMode In = std::ios_base::in;
 
- /// Open for input.  Default for @c ofstream.
- static const FileMode New = std::ios_base::trunc;
+//  /// Open for output.  Default for @c ofstream and fstream.
+//  static const FileMode Out = std::ios_base::out;
+
+//  /// Open for input.  Default for @c ofstream.
+//  static const FileMode New = std::ios_base::trunc;
 
  class CFile
  {
  public:
-     FileMode m_mode = (Out | New);
+     eFileMode m_mode = (eFileMode)(Out | New);
 
  private:
      std::ofstream *mp_in = nullptr;
@@ -45,14 +55,14 @@ namespace RuEngine
 
  public:
      CFile();
-     CFile(const char *_path, FileMode _mode = (Out | New));
+     CFile(const char *_path, eFileMode _mode = (eFileMode)(Out | New));
      CFile(CFile &_src);
 
  public:
      ~CFile();
 
  public:
-     void Open(const char *_path = nullptr, FileMode _mode = (Out | New));
+     void Open(const char *_path = nullptr, eFileMode _mode = (eFileMode)(Out | New));
 
  public:
      void Write(const char *msg);

@@ -9,7 +9,7 @@ CFile::CFile()
 
 }
 
-CFile::CFile(const char* _path, FileMode _mode)
+CFile::CFile(const char* _path, eFileMode _mode)
 {
     if(msz_path != nullptr)
     {
@@ -40,7 +40,7 @@ CFile::~CFile()
     Close();
 }
 
-void CFile::Open(const char* _path, FileMode _mode)
+void CFile::Open(const char* _path, eFileMode _mode)
 {
     if(mp_in != nullptr)
     {
@@ -50,11 +50,11 @@ void CFile::Open(const char* _path, FileMode _mode)
 
     if(_path == nullptr)
     {
-         mp_in = new std::ofstream(msz_path, _mode);
+         mp_in = new std::ofstream(msz_path, (std::ios_base::openmode)_mode);
     }
     else
     {
-         mp_in = new std::ofstream(_path, _mode);
+         mp_in = new std::ofstream(_path, (std::ios_base::openmode)_mode);
     }
 
     m_mode = _mode;
