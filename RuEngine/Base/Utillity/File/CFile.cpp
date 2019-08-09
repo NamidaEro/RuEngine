@@ -1,5 +1,6 @@
 #include "CFile.h"
 
+#include <string>
 #include <string.h>
 
 using namespace RuEngine;
@@ -50,11 +51,11 @@ void CFile::Open(const char* _path, eFileMode _mode)
 
     if(_path == nullptr)
     {
-         mp_in = new std::ofstream(msz_path, (std::ios_base::openmode)_mode);
+         mp_in = new std::fstream(msz_path, (std::ios_base::openmode)_mode);
     }
     else
     {
-         mp_in = new std::ofstream(_path, (std::ios_base::openmode)_mode);
+         mp_in = new std::fstream(_path, (std::ios_base::openmode)_mode);
     }
 
     m_mode = _mode;
@@ -67,12 +68,22 @@ void CFile::Write(const char* msg)
 
 const char* CFile::Read()
 {
+    if(mp_in == nullptr) return nullptr;
     return nullptr;
 }
 
 const char* CFile::Readline()
 {
-    return nullptr;
+    if(mp_in == nullptr) return nullptr;
+
+    if(getline(*mp_in, mstr_curline))
+    {
+        return mstr_curline.c_str();
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 const char* CFile::ReadEndline()

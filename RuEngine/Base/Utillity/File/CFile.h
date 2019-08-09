@@ -52,9 +52,11 @@ class CFile
      eFileMode m_mode = (eFileMode)(Out | New);
 
  private:
-     std::ofstream *mp_in = nullptr;
+     std::fstream *mp_in = nullptr;
 
      char *msz_path = nullptr;
+
+     std::string mstr_curline;
 
  public:
      CFile();
@@ -71,12 +73,12 @@ class CFile
      void Write(const char *msg);
 
  public:
-     const char *Read();
-     const char *Readline();
-     const char *ReadEndline();
+     const char * Read();
+     const char * Readline();
+     const char * ReadEndline();
 
  public:
-     const char *GetPath() const;
+     const char * GetPath() const;
 
  public:
      void Close();
