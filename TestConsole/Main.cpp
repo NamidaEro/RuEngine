@@ -17,8 +17,10 @@ int main(int argc, char** argv)
 	CFile file;
 	
 #if _WIN64 || _WIN32
-	file.Open("wintest.txt", (RuEngine::eFileMode)(Add | Out));
-	file.Write("\nTest");
+	file.Open("wintest.txt", (RuEngine::eFileMode)(Add | In));
+	//file.Write("\nTest");
+
+	file.Readline();
 #else
 	file.Open("/home/ubuntu/git/RuEngine/TestConsole/test.txt", (RuEngine::eFileMode)(Add | Out));
 	//file.Write(argv[1]);

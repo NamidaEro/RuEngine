@@ -1,2 +1,4 @@
 ﻿  Main.cpp
+e:\test\c++\ruengine\headers\cfile.h(59): warning C4251: 'RuEngine::CFile::mstr_curline': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'RuEngine::CFile'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xstring(4373): note: 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
   TestConsole.vcxproj -> E:\test\C++\RuEngine\x64\Debug\TestConsole.exe
