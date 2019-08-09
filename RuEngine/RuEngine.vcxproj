@@ -122,6 +122,7 @@
   <ItemGroup>
     <ClCompile Include="Base\Network\tcpclient\CTCPConnect.cpp" />
     <ClCompile Include="Base\Network\tcpserver\CTCPServer.cpp" />
+    <ClCompile Include="Base\Utillity\File\CFile.cpp" />
     <ClCompile Include="Base\Utillity\String\AString.cpp" />
     <ClCompile Include="Base\Utillity\String\WString.cpp" />
     <ClCompile Include="dllMain.cpp" />
@@ -129,6 +130,7 @@
   <ItemGroup>
     <ClInclude Include="Base\Network\tcpclient\CTCPConnect.h" />
     <ClInclude Include="Base\Network\tcpserver\CTCPServer.h" />
+    <ClInclude Include="Base\Utillity\File\CFile.h" />
     <ClInclude Include="Base\Utillity\String\AString.h" />
     <ClInclude Include="Base\Utillity\String\WString.h" />
   </ItemGroup>

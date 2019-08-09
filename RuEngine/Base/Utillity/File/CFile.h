@@ -42,8 +42,11 @@ enum eFileMode
 
 //  /// Open for input.  Default for @c ofstream.
 //  static const FileMode New = std::ios_base::trunc;
-
- class CFile
+#if _WIN64 || _WIN32
+class __declspec(dllexport) CFile
+#else
+class CFile
+#endif
  {
  public:
      eFileMode m_mode = (eFileMode)(Out | New);

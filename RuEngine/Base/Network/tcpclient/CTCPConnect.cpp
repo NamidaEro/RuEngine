@@ -34,13 +34,13 @@ void CTCPConnect::Initialize()
 
 void CTCPConnect::Initialize(const char* _sz_port, const char* _sz_addr)
 {
-	int addrlen = strnlen(_sz_addr, 255);
+	int addrlen = (int)strnlen(_sz_addr, 255);
 	msz_ip = new char[addrlen];
-	memccpy(msz_ip, _sz_addr, addrlen, 255);
+	memcpy(msz_ip, _sz_addr, addrlen);
 
-	int portlen = strnlen(_sz_port, 255);
+	int portlen = (int)strnlen(_sz_port, 255);
 	msz_port = new char[portlen];
-	memccpy(msz_port, _sz_port, portlen, 255);
+	memcpy(msz_port, _sz_port, portlen);
 }
 
 int CTCPConnect::Connect()
@@ -63,7 +63,12 @@ int CTCPConnect::Connect()
 
 void CTCPConnect::Send(void* _packet)
 {
-	int result = send(mtag_socket, (char*)_packet, strnlen_s((char*)_packet, 255), 0);
+	int result = 
+		send(
+			mtag_socket
+			, (char*)_packet
+			, (int)strnlen_s((char*)_packet, 255)
+			, 0);
 }
 
 void CTCPConnect::Close()
