@@ -1,5 +1,8 @@
 #ifndef CLEAKDETECT_H__
 #define CLEAKDETECT_H__
+
+#include "../../Include/Macro.h"
+
 namespace Engine
 {
 
@@ -10,7 +13,11 @@ class CLeakdetect
 #endif
 {
 public:
+    static CLeakdetect* Instance;
+private:
     CLeakdetect();
+    ~CLeakdetect();
+
 };
 }
 #endif;
